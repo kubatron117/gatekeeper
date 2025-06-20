@@ -7,4 +7,13 @@
     <strong class="block font-medium mb-1">Description:</strong>
     <%= project.description %>
   </div>
+  <div>
+    <strong class="block font-medium mb-1">Created at:</strong>
+    <%= project.created_at %>
+  </div>
+
+  <div>
+    <strong class="block font-medium mb-1">Count of tasks:</strong>
+    <%= Task.where(project_id: project.id).count %>
+  </div>
 </div>

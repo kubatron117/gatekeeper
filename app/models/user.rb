@@ -11,4 +11,8 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: { maximum: 100 }
   validates :last_name, presence: true, length: { maximum: 100 }
   #todo: validate email
+
+  def to_s
+    "#{first_name} #{last_name} (#{email})"
+  end
 end
