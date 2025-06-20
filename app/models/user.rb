@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   belongs_to :address, optional: true
 
+  accepts_nested_attributes_for :address
+
   validates :first_name, presence: true, length: { maximum: 100 }
   validates :last_name, presence: true, length: { maximum: 100 }
   #todo: validate email
