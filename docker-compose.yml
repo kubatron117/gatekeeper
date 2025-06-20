@@ -1,0 +1,56 @@
+services:
+  postgres:
+    image: postgres:17.5
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    volumes:
+      - pg-data-gatekeeper:/var/lib/gatekeeper/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - default
+      - gatekeeper-network-ext
+  rails:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    #      - memcached
+    volumes:
+      - .:/app
+    environment:
+      EDITOR: nano --wait
+    env_file:
+      - .env
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b 0.0.0.0"
+    networks:
+      - gatekeeper-network-ext
+  mailhog:
+    image: mailhog/mailhog
+    depends_on:
+      - rails
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - gatekeeper-network-ext
+#  memcached:
+#    image: memcached:1.6.31-alpine
+#    restart: unless-stopped
+#    ports:
+#      - "11211:11211"
+#    command: [ "-m", "1024" ]
+#    networks:
+#      - gatekeeper-network-ext
+volumes:
+  pg-data-gatekeeper:
+    driver: local
+
+networks:
+  gatekeeper-network-ext:
+    external: true
