@@ -14,6 +14,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_20_115230) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "street_name", limit: 100, null: false
+    t.string "street_number", limit: 20, null: false
+    t.string "city", limit: 100, null: false
+    t.string "postal_code", limit: 20, null: false
+    t.string "country_name", limit: 100, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -43,11 +53,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_20_115230) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
-    t.string "address"
+    t.bigint "address_id", null: false
+    t.index ["address_id"], name: "index_users_on_address_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"
+  add_foreign_key "users", "addresses"
 end
