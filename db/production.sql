@@ -1,0 +1,4 @@
+CREATE DATABASE gatekeeper_production;
+CREATE DATABASE gatekeeper_production_cache;
+CREATE DATABASE gatekeeper_production_queue;
+CREATE DATABASE gatekeeper_production_cable;
