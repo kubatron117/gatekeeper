@@ -1,7 +1,10 @@
 <%= simple_form_for @task do |f| %>
+  <%= f.error_notification %>
   <%= f.input :subject %>
   <%= f.input :description %>
-  <%= f.input :status, as: :select, collection: Task.statuses.keys.map { |s| [s.humanize, s] } %>
+  <% if f.object.persisted? %>
+    <%= f.input :status, as: :select, collection: Task.statuses.keys.map { |s| [s.humanize, s] }%>
+  <% end %>
   <%= f.association :user %>
   <%= f.association :project %>
   <%= f.button :submit %>

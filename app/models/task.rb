@@ -10,7 +10,7 @@ class Task < ApplicationRecord
   validates :user_id, presence: true
   validates :project_id, presence: true
 
-  before_create :assign_default_status
+  before_validation :assign_default_status, on: :create
 
 
   private
