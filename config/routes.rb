@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { invitations: 'users/invitations' }
+  devise_for :users, controllers: { invitations: 'users/invitations', registrations: 'users/registrations' }
   resources :tasks
   resources :projects
   resources :users

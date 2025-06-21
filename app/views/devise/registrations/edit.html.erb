@@ -13,62 +13,64 @@
 
     <% resource.build_address unless resource.address %>
 
-    <%= form_for(resource,
-                 as: resource_name,
-                 url: registration_path(resource_name),
-                 html: { method: :put, class: "mt-8 space-y-6", multipart: true }) do |f| %>
+    <%= simple_form_for(resource,
+                        as: resource_name,
+                        url: registration_path(resource_name),
+                        html: { method: :put, class: "mt-8 space-y-6", multipart: true }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="flex items-center justify-center">
-        <%= f.label :avatar, class: "block text-sm font-medium text-gray-900 mr-4" do %>
-          Avatar
-        <% end %>
-        <%= f.file_field :avatar,
-                         class: "block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" %>
+        <%= f.input :avatar,
+                    as: :file,
+                    label_html: { class: "block text-sm font-medium text-gray-900 mr-4" },
+                    input_html: { class: "block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" } %>
       </div>
 
       <div class="space-y-4">
-        <% [:email, :password, :password_confirmation, :current_password].each do |attr| %>
-          <div>
-            <%= f.label attr, class: "block text-sm font-medium text-gray-900" %>
-            <div class="mt-1">
-              <% case attr
-                 when :email %>
-                <%= f.email_field :email,
-                                  autofocus: true,
-                                  autocomplete: "email",
-                                  required: true,
-                                  class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-              <% when :password, :password_confirmation %>
-                <%= f.password_field attr,
-                                     autocomplete: "new-password",
-                                     class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-                <% if attr == :password && @minimum_password_length %>
-                  <p class="text-xs text-gray-500 mt-1">(<%= @minimum_password_length %> characters minimum)</p>
-                <% end %>
-              <% when :current_password %>
-                <%= f.password_field :current_password,
-                                     autocomplete: "current-password",
-                                     required: true,
-                                     class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-              <% end %>
-            </div>
-          </div>
+        <% [:current_password, :email, :password, :password_confirmation].each do |attr| %>
+          <%= f.input attr,
+                      as: (attr == :email ? :email : :password),
+                      required: (attr == :current_password || attr == :email),
+                      autocomplete: (attr == :email ? "email" : attr == :current_password ? "current-password" : "new-password"),
+                      label: (attr == :current_password ? t("simple_form.labels.devise.current_password") : nil),
+                      hint: (attr == :password && @minimum_password_length ? "(#{@minimum_password_length} characters minimum)" : nil),
+                      input_html: { autofocus: (attr == :email), class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
         <% end %>
+
+        <%= f.input :first_name,
+                    as: :string,
+                    required: true,
+                    input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+
+        <%= f.input :last_name,
+                    as: :string,
+                    required: true,
+                    input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
       </div>
 
       <div class="pt-6 border-t border-gray-200 space-y-4">
         <h3 class="text-lg font-medium text-gray-900">Address</h3>
-        <%= f.fields_for :address do |a| %>
+        <%= f.simple_fields_for :address do |a| %>
           <div class="grid grid-cols-1 gap-y-4">
-            <% [:street_name, :street_number, :city, :postal_code, :country_name].each do |field| %>
-              <div>
-                <%= a.label field, class: "block text-sm font-medium text-gray-900" %>
-                <div class="mt-1">
-                  <%= a.text_field field,
-                                   required: true,
-                                   class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-                </div>
+            <%= a.input :street_name,
+                        input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+            <%= a.input :street_number,
+                        input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+            <%= a.input :city,
+                        input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+            <%= a.input :postal_code,
+                        input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+            <%= a.input :country_name,
+                        as: :string,
+                        input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+
+            <% if a.object.persisted? %>
+              <div class="flex items-center space-x-2 mt-2">
+                <%= a.input :_destroy,
+                            as: :boolean,
+                            label: "Remove address",
+                            boolean_label_class: "text-sm text-red-600",
+                            input_html: { class: "h-4 w-4 text-red-600" } %>
               </div>
             <% end %>
           </div>
@@ -76,7 +78,7 @@
       </div>
 
       <div class="flex flex-col space-y-4">
-        <%= f.submit "Update account",
+        <%= f.button :submit, "Update account",
                      class: "group relative flex w-full justify-center rounded-md bg-indigo-600 py-2 px-4 text-sm font-semibold text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" %>
 
         <%= button_to "Cancel my account",
