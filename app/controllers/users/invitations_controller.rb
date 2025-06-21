@@ -1,8 +1,16 @@
 class Users::InvitationsController < Devise::InvitationsController
+  before_action :authenticate_user!
+  before_action :authorize_admin, only: [:new, :create, :destroy]
   before_action :build_address, only: [:edit]
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
+
+  def authorize_admin
+    return if current_user&.admin?
+
+    redirect_to root_path, alert: "You are not authorized to perform this action."
+  end
 
   def build_address
     resource.build_address unless resource.address
