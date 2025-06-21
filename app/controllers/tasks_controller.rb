@@ -3,7 +3,8 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all
+    @q = Task.includes(:user, :project).ransack(params[:q])
+    @tasks = @q.result.page(params[:page])
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -65,6 +66,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.expect(task: [ :subject, :description, :status, :user_id, :project_id ])
+      params.expect(task: [ :subject, :description, :status, :user_id, :project_id, attachments: [] ])
     end
 end

@@ -1,0 +1,15 @@
+<%# app/views/shared/_search_form.html.erb Locals: form:, url:, fields: %>
+<%= search_form_for form, url: url, method: :get,
+                    class: "flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2" do |f| %>
+
+  <% ransack_key = (fields.map(&:to_s).join("_or_") + "_cont") %>
+  <div class="w-full sm:w-64">
+    <%= f.label ransack_key, class: "sr-only" %>
+    <%= f.search_field ransack_key,
+                       placeholder: "Search",
+                       class: "w-full border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500" %>
+  </div>
+
+  <%= f.submit "Search", class: "px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-md" %>
+  <%= link_to "Reset", url, class: "px-4 py-2 bg-gray-200 hover:bg-gray-100 text-gray-700 rounded-md" %>
+<% end %>
