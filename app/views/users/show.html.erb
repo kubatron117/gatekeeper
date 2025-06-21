@@ -1,60 +1,13 @@
 <% content_for :title, "User details" %>
 
 <div class="md:w-2/3 w-full mx-auto">
-  <% if notice.present? %>
-    <p
-      id="notice"
-      class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block"
-    ><%= notice %></p>
-  <% end %>
+  <%= render "shared/flash" %>
 
-  <h1 class="font-bold text-4xl mb-6">User details</h1>
+  <h1 class="font-bold text-4xl">User details</h1>
 
-  <div class="bg-white shadow rounded-md p-6 space-y-4">
-    <%# Avatar %>
-    <% if @user.avatar.attached? %>
-      <div>
-        <%= image_tag @user.avatar.variant(resize: "150x150"), class: "rounded-full" %>
-      </div>
-    <% end %>
+  <%= render @user %>
 
-    <%# Basic info %>
-    <div>
-      <p class="font-semibold">Name:</p>
-      <p><%= @user.first_name %> <%= @user.last_name %></p>
-    </div>
-    <div>
-      <p class="font-semibold">Email:</p>
-      <p><%= @user.email %></p>
-    </div>
-
-    <%# Address, pokud existuje %>
-    <% if @user.address.present? %>
-      <div>
-        <p class="font-semibold">Address:</p>
-        <p>
-          <%= @user.address.street_name %> <%= @user.address.street_number %>,<br>
-          <%= @user.address.postal_code %> <%= @user.address.city %>,<br>
-          <%= @user.address.country_name %>
-        </p>
-      </div>
-    <% end %>
-  </div>
-
-  <div class="mt-6 flex flex-col sm:flex-row sm:space-x-2 space-y-2 sm:space-y-0">
-    <%= link_to "Edit user",
-                edit_user_path(@user),
-                class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 font-medium" %>
-
-    <%= link_to "Back to users",
-                users_path,
-                class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 font-medium" %>
-
-    <%= button_to "Destroy user",
-                  @user,
-                  method: :delete,
-                  data: { turbo_confirm: "Are you sure?" },
-                  form_class: "w-full sm:inline-block",
-                  class: "rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer" %>
-  </div>
+  <%= link_to "Edit this user", edit_user_path(@user), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= link_to "Back to users", users_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+  <%= button_to "Destroy this user", @user, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
 </div>
