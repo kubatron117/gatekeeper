@@ -9,14 +9,14 @@
   </div>
   <div>
     <strong class="block font-medium mb-1">Status:</strong>
-    <%= task.status %>
+    <%= task.status.humanize %>
   </div>
   <div>
     <strong class="block font-medium mb-1">User:</strong>
-    <%= task.user_id %>
+    <%= task.user %>
   </div>
   <div>
     <strong class="block font-medium mb-1">Project:</strong>
-    <%= task.project_id %>
+    <%= task.project.name %>
   </div>
 </div>

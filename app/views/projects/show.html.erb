@@ -9,11 +9,25 @@
 
   <%= render @project %>
 
-  <div class="">--------------  tasks: </div>
-
-  <%= render @tasks %>
-
   <%= link_to "Edit this project", edit_project_path(@project), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <%= link_to "Back to projects", projects_path, class: "w-full sm:w-auto text-center mt-2 sm:mt-0 sm:ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
   <%= button_to "Destroy this project", @project, method: :delete, form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2", class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer", data: { turbo_confirm: "Are you sure?" } %>
+
+  <h2 class="mt-10 font-bold text-3xl">Tasks for project: </h2>
+
+  <div class="mt-3">
+    <%= render 'shared/table',
+               headers: ["Subject", "Status", "Assigned to", "Project", "Created at", "Actions"],
+               pagination: @tasks do %>
+      <% if @tasks.any? %>
+        <%= render partial: "tasks/task_row", collection: @tasks, as: :task %>
+      <% else %>
+        <tr>
+          <td colspan="4" class="text-center py-10 text-gray-500">
+            No tasks found.
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </div>
 </div>

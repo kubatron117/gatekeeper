@@ -13,7 +13,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1 or /projects/1.json
   def show
-    @tasks = Task.where(project_id: @project.id)
+    @tasks = Task.where(project_id: @project.id).page(params[:page])
   end
 
   # GET /projects/new
