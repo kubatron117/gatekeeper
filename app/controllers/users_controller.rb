@@ -1,21 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
 
-  def new
-    @user = User.new
-    @user.build_address
-  end
-
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      redirect_to @user, notice: "User was successfully created."
-    else
-      @user.build_address unless @user.address
-      render :new, status: :unprocessable_entity
-    end
-  end
-
   # GET /users
   def index
     @users = User.all
@@ -27,6 +12,7 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    @user.build_address if @user.address.nil?
   end
 
   # PATCH/PUT /users/1
@@ -55,7 +41,15 @@ class UsersController < ApplicationController
       :first_name, :last_name, :email,
       :password, :password_confirmation,
       :avatar,
-      address_attributes: %i[id street city zip country _destroy]
+      address_attributes: %i[
+        id
+        street_name
+        street_number
+        city
+        postal_code
+        country_name
+        _destroy
+      ]
     )
   end
 end

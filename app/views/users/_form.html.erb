@@ -5,16 +5,6 @@
     <%= f.input :first_name, required: true %>
     <%= f.input :last_name,  required: true %>
     <%= f.input :email,      required: true, as: :email %>
-    <%= f.input :password,     hint: (user.persisted? ? "Leave blank to keep current password" : nil) %>
-    <%= f.input :password_confirmation,
-                hint: (user.persisted? ? "Leave blank to keep current password" : nil) %>
-
-    <div class="mt-6">
-      <%= f.input :avatar, as: :file,
-                  hint: (user.avatar.attached? ?
-                           image_tag(user.avatar.variant(resize_to_limit: [50,50])) :
-                           nil) %>
-    </div>
   </div>
 
   <hr class="my-6"/>

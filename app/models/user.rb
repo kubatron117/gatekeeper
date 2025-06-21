@@ -2,9 +2,11 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  belongs_to :address, optional: true
+  belongs_to :address, optional: true, dependent: :destroy
 
-  accepts_nested_attributes_for :address
+  accepts_nested_attributes_for :address,
+                                allow_destroy: true,
+                                reject_if: :all_blank
   has_one_attached :avatar
 
   validates :first_name, presence: true, length: { maximum: 100 }
