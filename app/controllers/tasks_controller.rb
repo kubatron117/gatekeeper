@@ -3,7 +3,8 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = Task.all.page(params[:page])
+    @q = Task.includes(:user, :project).ransack(params[:q])
+    @tasks = @q.result.page(params[:page])
   end
 
   # GET /tasks/1 or /tasks/1.json

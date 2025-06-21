@@ -1,0 +1,26 @@
+<tr>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+    <%= task.subject %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= task.status.humanize %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= task.user %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= task.project.name %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= l(task.created_at, format: :short) %>
+  </td>
+  <td class="px-6 py-4 flex items-center space-x-2">
+    <%= link_to "Show", task,
+                class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-blue-600 hover:text-blue-800" %>
+    <%= link_to "Edit", edit_task_path(task),
+                class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-blue-600 hover:text-blue-800" %>
+    <%= button_to "Destroy", task, method: :delete,
+                  data: { turbo_confirm: "Are you sure?" },
+                  class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-red-600 hover:text-red-800" %>
+  </td>
+</tr>

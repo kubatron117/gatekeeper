@@ -4,12 +4,16 @@ class ProjectsController < ApplicationController
   # GET /projects or /projects.json
   def index
     @q = Project.ransack(params[:q])
-    @projects = @q.result.page(params[:page])
+    @projects = @q.result
+                  .left_joins(:tasks)
+                  .select('projects.*, COUNT(tasks.id) AS tasks_count')
+                  .group('projects.id')
+                  .page(params[:page])
   end
 
   # GET /projects/1 or /projects/1.json
   def show
-    @tasks = Task.where(project_id: @project.id)
+    @tasks = Task.where(project_id: @project.id).page(params[:page])
   end
 
   # GET /projects/new
@@ -51,11 +55,14 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1 or /projects/1.json
   def destroy
-    @project.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to projects_path, status: :see_other, notice: "Project was successfully destroyed." }
-      format.json { head :no_content }
+    if @project.destroy
+      redirect_to projects_path,
+                  status: :see_other,
+                  notice: "Project was successfully destroyed."
+    else
+      redirect_to projects_path,
+                  status: :see_other,
+                  alert: "Project could not be deleted."
     end
   end
 
