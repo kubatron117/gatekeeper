@@ -11,36 +11,39 @@
       </h2>
     </div>
 
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "mt-8 space-y-6" }) do |f| %>
+    <%= simple_form_for(resource,
+                        as: resource_name,
+                        url: session_path(resource_name),
+                        html: { class: "mt-8 space-y-6" }) do |f| %>
       <%= render "devise/shared/error_messages", resource: resource %>
 
       <div class="space-y-4">
-        <div>
-          <%= f.label :email, class: "block text-sm font-medium text-gray-900" %>
-          <div class="mt-1">
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", required: true,
-                              class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-          </div>
-        </div>
+        <%= f.input :email,
+                    as: :email,
+                    required: true,
+                    autofocus: true,
+                    autocomplete: "email",
+                    label_html: { class: "block text-sm font-medium text-gray-900" },
+                    input_html: { class: "mt-1 block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
 
-        <div>
-          <%= f.label :password, class: "block text-sm font-medium text-gray-900" %>
-          <div class="mt-1">
-            <%= f.password_field :password, autocomplete: "current-password", required: true,
-                                 class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
-          </div>
-        </div>
+        <%= f.input :password,
+                    as: :password,
+                    required: true,
+                    autocomplete: "current-password",
+                    label_html: { class: "block text-sm font-medium text-gray-900" },
+                    input_html: { class: "mt-1 block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
       </div>
 
       <% if devise_mapping.rememberable? %>
-        <div class="flex items-center">
-          <%= f.check_box :remember_me, class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" %>
-          <%= f.label :remember_me, class: "ml-2 block text-sm text-gray-900" %>
-        </div>
+        <%= f.input :remember_me,
+                    as: :boolean,
+                    label_html: { class: "ml-2 block text-sm text-gray-900" },
+                    input_html: { class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" },
+                    wrapper_html: { class: "flex items-center" } %>
       <% end %>
 
       <div>
-        <%= f.submit "Log in",
+        <%= f.button :submit, "Log in",
                      class: "group relative flex w-full justify-center rounded-md bg-indigo-600 py-2 px-4 text-sm font-semibold text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" %>
       </div>
     <% end %>
