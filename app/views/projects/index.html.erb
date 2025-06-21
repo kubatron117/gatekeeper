@@ -10,6 +10,17 @@
     <%= link_to "New project", new_project_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
   </div>
 
+  <div class="my-6">
+    <%= search_form_for @q, url: projects_path, method: :get, class: "flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2" do |f| %>
+      <div class="w-full sm:w-64">
+        <%= f.label :name_cont, "Search by name", class: "sr-only" %>
+        <%= f.search_field :name_cont, placeholder: "Search by name...", class: "w-full border-gray-300 rounded-md p-2 focus:ring-blue-500 focus:border-blue-500" %>
+      </div>
+      <%= f.submit "Search", class: "px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-md" %>
+      <%= link_to "Reset", projects_path, class: "px-4 py-2 bg-gray-200 hover:bg-gray-100 text-gray-700 rounded-md" %>
+    <% end %>
+  </div>
+
   <div id="projects" class="min-w-full divide-y divide-gray-200 space-y-5">
     <% if @projects.any? %>
       <% @projects.each do |project| %>
