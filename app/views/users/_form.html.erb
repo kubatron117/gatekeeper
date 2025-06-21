@@ -1,0 +1,42 @@
+<%= simple_form_for(user, html: { multipart: true }) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="space-y-4">
+    <%= f.input :first_name, required: true %>
+    <%= f.input :last_name,  required: true %>
+    <%= f.input :email,      required: true, as: :email %>
+    <%= f.input :password,     hint: (user.persisted? ? "Leave blank to keep current password" : nil) %>
+    <%= f.input :password_confirmation,
+                hint: (user.persisted? ? "Leave blank to keep current password" : nil) %>
+
+    <div class="mt-6">
+      <%= f.input :avatar, as: :file,
+                  hint: (user.avatar.attached? ?
+                           image_tag(user.avatar.variant(resize_to_limit: [50,50])) :
+                           nil) %>
+    </div>
+  </div>
+
+  <hr class="my-6"/>
+
+  <h3 class="text-xl font-medium mb-4">Address (optional)</h3>
+  <%= f.simple_fields_for :address do |a| %>
+    <div class="grid grid-cols-1 gap-y-4">
+      <%= a.input :street_name,   required: false, label: "Street name"   %>
+      <%= a.input :street_number, required: false, label: "Street number" %>
+      <%= a.input :city,          required: false, label: "City"          %>
+      <%= a.input :postal_code,   required: false, label: "Postal code"   %>
+      <%= a.input :country_name,
+                  as: :string,
+                  required: false,
+                  label: "Country" %>
+      <% if a.object.persisted? %>
+        <%= a.input :_destroy, as: :boolean, label: "Remove address" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="mt-6">
+    <%= f.button :submit, class: "rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-500" %>
+  </div>
+<% end %>
