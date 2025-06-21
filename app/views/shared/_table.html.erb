@@ -4,7 +4,10 @@
       <div class="border border-gray-200 rounded-lg divide-y divide-gray-200">
         <% if local_assigns[:search] %>
           <div class="py-3 px-4">
-            <%= render partial: 'shared/search_form', locals: { f: search[:form], url: search[:url] } %>
+            <%= render 'shared/search_form',
+                       form:   search[:form],
+                       url:    search[:url],
+                       fields: search[:fields] %>
           </div>
         <% end %>
 

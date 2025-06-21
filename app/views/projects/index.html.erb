@@ -12,7 +12,7 @@
   <%= render 'shared/table',
              headers: ["Name", "Created at", "Tasks", "Actions"],
              pagination: @projects,
-             search: { form: @q, url: projects_path } do %>
+             search: { form: @q, url: projects_path, fields: [:name] } do %>
     <% if @projects.any? %>
       <%= render partial: "project_row", collection: @projects, as: :project %>
     <% else %>
