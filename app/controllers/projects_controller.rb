@@ -4,7 +4,11 @@ class ProjectsController < ApplicationController
   # GET /projects or /projects.json
   def index
     @q = Project.ransack(params[:q])
-    @projects = @q.result.page(params[:page])
+    @projects = @q.result
+                  .left_joins(:tasks)
+                  .select('projects.*, COUNT(tasks.id) AS tasks_count')
+                  .group('projects.id')
+                  .page(params[:page])
   end
 
   # GET /projects/1 or /projects/1.json
