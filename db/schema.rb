@@ -81,7 +81,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_072216) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
-    t.bigint "address_id", null: false
+    t.bigint "address_id"
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
