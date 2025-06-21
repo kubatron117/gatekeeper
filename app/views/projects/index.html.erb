@@ -10,7 +10,12 @@
   <%= render 'shared/flash' %>
 
   <%= render 'shared/table',
-             headers: ["Name", "Created at", "Tasks", "Actions"],
+             headers: [
+               { attr: :name, label: "Name" },
+               { attr: :created_at, label: "Created at" },
+               { attr: nil, label: "Tasks" },
+               { attr: nil, label: "Actions" }
+             ],
              pagination: @projects,
              search: { form: @q, url: projects_path, fields: [:name] } do %>
     <% if @projects.any? %>
