@@ -1,6 +1,17 @@
-<% if notice.present? %>
-  <p id="notice"
-     class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block">
-    <%= notice %>
+<% flash.each do |key, msg| %>
+  <% css =
+       case key.to_sym
+       when :notice then
+         "bg-green-50 text-green-500"
+       when :alert then
+         "bg-red-50 text-red-500"
+       else
+         "bg-gray-50 text-gray-700"
+       end
+  %>
+
+  <p id="<%= key %>"
+     class="py-2 px-3 mb-5 font-medium rounded-md inline-block <%= css %>">
+    <%= msg %>
   </p>
 <% end %>

@@ -55,11 +55,14 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1 or /projects/1.json
   def destroy
-    @project.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to projects_path, status: :see_other, notice: "Project was successfully destroyed." }
-      format.json { head :no_content }
+    if @project.destroy
+      redirect_to projects_path,
+                  status: :see_other,
+                  notice: "Project was successfully destroyed."
+    else
+      redirect_to projects_path,
+                  status: :see_other,
+                  alert: "Project could not be deleted."
     end
   end
 
