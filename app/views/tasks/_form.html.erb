@@ -3,17 +3,30 @@
   <%= f.input :subject %>
   <%= f.input :description %>
   <% if f.object.persisted? %>
-    <%= f.input :status, as: :select, collection: Task.statuses.keys.map { |s| [s.humanize, s] }%>
+    <%= f.input :status, as: :select, collection: Task.statuses.keys.map { |s| [s.humanize, s] } %>
   <% end %>
   <%= f.association :user %>
   <%= f.association :project %>
-  <div class="form-group">
-    <%= f.input :attachments,
-                as: :file,
-                input_html: {
-                  multiple: true,
-                  direct_upload: true
-                } %>
+
+  <div data-controller="attachments">
+    <div data-attachments-target="list">
+      <%= f.simple_fields_for :task_attachments do |ta| %>
+        <%= render 'task_attachment_fields', f: ta %>
+      <% end %>
+    </div>
+
+    <template data-attachments-target="template">
+      <%= f.simple_fields_for :task_attachments, TaskAttachment.new, child_index: "NEW_RECORD" do |ta| %>
+        <%= render 'task_attachment_fields', f: ta, new_record: true %>
+      <% end %>
+    </template>
+
+    <div class="mt-2">
+      <button class="btn btn-secondary" type="button" data-action="attachments#add">
+        Přidat přílohu
+      </button>
+    </div>
   </div>
-  <%= f.button :submit %>
+
+  <%= f.button :submit, class: 'btn btn-primary mt-3' %>
 <% end %>
