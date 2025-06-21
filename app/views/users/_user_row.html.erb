@@ -1,0 +1,41 @@
+<tr>
+  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+    <%= render "users/user_avatar", user: user %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= user.first_name %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= user.last_name %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= user.email %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= l(user.created_at, format: :short) %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= user&.address&.street_name %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= user&.address&.street_number %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= user&.address&.city %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= user&.address&.postal_code %>
+  </td>
+  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+    <%= user&.address&.country_name %>
+  </td>
+  <td class="px-6 py-4 flex items-center space-x-2">
+    <%= link_to "Show", user,
+                class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-blue-600 hover:text-blue-800" %>
+    <%= link_to "Edit", edit_user_path(user),
+                class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-blue-600 hover:text-blue-800" %>
+    <%= button_to "Destroy", user, method: :delete,
+                  data: { turbo_confirm: "Are you sure?" },
+                  class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-red-600 hover:text-red-800" %>
+  </td>
+</tr>

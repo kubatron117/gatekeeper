@@ -59,6 +59,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_101247) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "task_attachments", force: :cascade do |t|
+    t.bigint "task_id", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["task_id"], name: "index_task_attachments_on_task_id"
+  end
+
   create_table "tasks", force: :cascade do |t|
     t.string "subject"
     t.text "description"
@@ -81,7 +89,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_101247) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
-    t.bigint "address_id"
+    t.bigint "address_id", null: false
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -101,6 +109,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_101247) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "task_attachments", "tasks"
   add_foreign_key "tasks", "projects"
   add_foreign_key "tasks", "users"
   add_foreign_key "users", "addresses"

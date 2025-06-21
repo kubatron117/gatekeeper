@@ -1,0 +1,7 @@
+<% if user.avatar.attached? %>
+  <%= image_tag user.avatar.variant(resize_to_limit: [50,50]), class: "rounded-full" %>
+<% else %>
+  <div class="w-8 h-8 bg-gray-200 rounded-full flex items-center justify-center text-gray-400">
+    <%= user.first_name.first.upcase %>
+  </div>
+<% end %>

@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   # GET /users
   def index
+    @users = User.accessible_by(current_ability).page(params[:page])
   end
 
   # GET /users/1
