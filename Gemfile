@@ -44,6 +44,9 @@ gem "image_processing", "~> 1.2"
 gem "devise", "~> 4.9.4"
 gem "simple_form", "~> 5.3.1"
 gem "simple_form-tailwind", "~> 0.2.0"
+gem "devise_invitable", "~> 2.0.11"
+gem "cancancan", "~> 3.6.1"
+
 gem 'kaminari', "~> 1.2.2"
 gem 'ransack', "~> 4.3.0"
 
