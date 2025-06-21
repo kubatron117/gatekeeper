@@ -2,7 +2,10 @@ class Task < ApplicationRecord
   belongs_to :user
   belongs_to :project
 
-  has_many_attached :attachments
+  has_many :task_attachments, dependent: :destroy, inverse_of: :task
+  accepts_nested_attributes_for :task_attachments,
+                                allow_destroy: true,
+                                reject_if: ->(attrs){ attrs['file'].blank? && attrs['note'].blank? }
 
   enum :status, { created: 1, in_progress: 2, waiting_for_client: 3, completed: 4 }
 

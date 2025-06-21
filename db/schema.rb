@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_21_101247) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_21_123128) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -61,7 +61,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_101247) do
 
   create_table "task_attachments", force: :cascade do |t|
     t.bigint "task_id", null: false
-    t.string "description"
+    t.text "note"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["task_id"], name: "index_task_attachments_on_task_id"
@@ -89,7 +89,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_101247) do
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
-    t.bigint "address_id", null: false
+    t.bigint "address_id"
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
