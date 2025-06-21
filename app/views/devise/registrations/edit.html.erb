@@ -28,7 +28,7 @@
       </div>
 
       <div class="space-y-4">
-        <% [:email, :password, :password_confirmation, :current_password].each do |attr| %>
+        <% [:current_password, :email, :password, :password_confirmation].each do |attr| %>
           <div>
             <%= f.label attr, class: "block text-sm font-medium text-gray-900" %>
             <div class="mt-1">
@@ -66,9 +66,14 @@
                 <%= a.label field, class: "block text-sm font-medium text-gray-900" %>
                 <div class="mt-1">
                   <%= a.text_field field,
-                                   required: true,
                                    class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" %>
                 </div>
+              </div>
+            <% end %>
+            <% if a.object.persisted? %>
+              <div class="flex items-center space-x-2 mt-2">
+                <%= a.check_box :_destroy, class: "h-4 w-4 text-red-600" %>
+                <%= a.label :_destroy, "Remove address", class: "text-sm text-red-600" %>
               </div>
             <% end %>
           </div>
