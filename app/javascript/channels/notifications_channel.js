@@ -17,7 +17,6 @@ function createToast(message) {
          role="alert" tabindex="-1" aria-labelledby="toast-label">
       <div class="flex p-4">
         <div class="shrink-0">
-          <!-- ikona -->
         </div>
         <div class="ms-3">
           <p id="toast-label" class="text-sm text-gray-700">${message}</p>
@@ -27,18 +26,15 @@ function createToast(message) {
   `;
   container.appendChild(toast);
 
-  // fade-out po 3s
   setTimeout(() => fadeOutAndRemove(toast), 3000);
 }
 
 consumer.subscriptions.create("NotificationsChannel", {
   connected() {
     console.log("NotificationsChannel connected")
-    // Called when the subscription is ready for use on the server
   },
 
   disconnected() {
-    // Called when the subscription has been terminated by the server
   },
 
   received(data) {

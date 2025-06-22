@@ -22,8 +22,6 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    puts "Creating task with params: #{params.inspect}"
-    puts "Creating task with params: #{task_params.inspect}"
     @task = Task.new(task_params)
 
     respond_to do |format|
@@ -61,14 +59,11 @@ class TasksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params.expect(:id))
     end
 
-    # Only allow a list of trusted parameters through.
     def task_params
-      # params.expect(task: [ :subject, :description, :status, :user_id, :project_id, task_attachments_attributes: %i[id file note _destroy] ])
       params
         .require(:task)
         .permit(
