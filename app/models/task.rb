@@ -17,6 +17,8 @@ class Task < ApplicationRecord
 
   before_validation :assign_default_status, on: :create
 
+  after_create :enqueue_notify_users
+
 
   private
 
@@ -32,5 +34,9 @@ class Task < ApplicationRecord
 
   def self.ransackable_associations(auth_object = nil)
     ["project"]
+  end
+
+  def enqueue_notify_users
+    NotifyUsersJob.perform_later(self.id)
   end
 end
