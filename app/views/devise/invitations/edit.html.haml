@@ -1,0 +1,55 @@
+- content_for :title, t("devise.invitations.edit.header")
+
+= render "shared/secondary_container", title: t("devise.invitations.edit.header") do
+  - resource.build_address unless resource.address
+
+  = simple_form_for resource, as: resource_name,
+                      url: invitation_path(resource_name),
+                      html: { method: :put, multipart: true } do |f|
+    = f.error_notification
+    = f.hidden_field :invitation_token
+
+    .form-inputs
+      = f.input :password,
+        required: true,
+        placeholder: 'Password',
+        input_html: { minlength: 6, maxlength: 128 }
+      = f.input :password_confirmation,
+        required: true,
+        placeholder: 'Password again',
+        input_html: { minlength: 6, maxlength: 128 }
+
+      = f.input :avatar, as: :file,
+        hint: (resource.avatar.attached? ? image_tag(resource.avatar.variant(resize: "100x100")) : nil),
+        required: false,
+        input_html: { accept: 'image/png,image/jpeg,image/tiff' }
+
+      = f.simple_fields_for :address do |a|
+        = a.input :street_name,
+          placeholder: "Street",
+          required: false,
+          input_html: { maxlength: 100 }
+        = a.input :street_number,
+          placeholder: "House number",
+          required: false,
+          input_html: { maxlength: 20 }
+        = a.input :city,
+          placeholder: "City",
+          required: false,
+          input_html: { maxlength: 100 }
+        = a.input :postal_code,
+          placeholder: "Postal code",
+          required: false,
+          input_html: { maxlength: 20 }
+        = a.input :country_name,
+          as: :string,
+          placeholder: "Country",
+          required: false,
+          input_html: { maxlength: 100 }
+
+    .form-actions
+      = f.button :submit, 'Accept invitation'
+
+  = render "shared/action_link_primary",
+    name: t("actions.back_to_users", default: "Back to users"),
+    path: users_path

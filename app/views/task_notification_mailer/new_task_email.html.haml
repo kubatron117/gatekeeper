@@ -1,0 +1,23 @@
+!!! 5
+%html
+  %body
+    %h1 Hello #{@assigned_user.first_name} #{@assigned_user.last_name},
+    %p A new task has been created and assigned to you:
+    %ul
+      %li
+        %strong Subject:
+        = @task.subject
+      %li
+        %strong Description:
+        = @task.description.presence || "—no description—"
+      %li
+        %strong Status:
+        = @task.status.humanize
+      %li
+        %strong Assigned User:
+        = "#{@assigned_user.first_name} #{@assigned_user.last_name}"
+      %li
+        %strong Project:
+        = @project_name
+    %p
+      = link_to "View Task", task_url(@task)
