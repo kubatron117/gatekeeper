@@ -25,7 +25,9 @@
                     input_html: {
                       class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900
                               outline-1 outline-gray-300 placeholder:text-gray-400
-                              focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                              focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                      minlength: @minimum_password_length,
+                      maxlength: 128
                     },
                     hint: (@minimum_password_length ? "(#{@minimum_password_length} characters minimum)" : nil),
                     hint_html: { class: "block text-sm text-gray-500" },
@@ -39,7 +41,9 @@
                     input_html: {
                       class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900
                               outline-1 outline-gray-300 placeholder:text-gray-400
-                              focus:outline-2 focus:outline-indigo-600 sm:text-sm"
+                              focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                      minlength: @minimum_password_length,
+                      maxlength: 128
                     },
                     wrapper_html: { class: "" },
                     label_html: { class: "block text-sm font-medium text-gray-900" } %>

@@ -4,9 +4,28 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :email,           required: true, autofocus: true, placeholder: "E-mail" %>
-    <%= f.input :first_name,      required: true, placeholder: "First name" %>
-    <%= f.input :last_name,       required: true, placeholder: "Last name" %>
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                placeholder: "E-mail",
+                input_html: {
+                  type: "email",
+                  maxlength: 255
+                } %>
+
+    <%= f.input :first_name,
+                required: true,
+                placeholder: "First name",
+                input_html: {
+                  maxlength: 100
+                } %>
+
+    <%= f.input :last_name,
+                required: true,
+                placeholder: "Last name",
+                input_html: {
+                  maxlength: 100
+                } %>
   </div>
 
   <div class="form-actions">

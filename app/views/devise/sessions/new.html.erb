@@ -24,14 +24,22 @@
                     autofocus: true,
                     autocomplete: "email",
                     label_html: { class: "block text-sm font-medium text-gray-900" },
-                    input_html: { class: "mt-1 block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                    input_html: {
+                      class: "mt-1 block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                      type: "email",
+                      maxlength: 255
+                    } %>
 
         <%= f.input :password,
                     as: :password,
                     required: true,
                     autocomplete: "current-password",
                     label_html: { class: "block text-sm font-medium text-gray-900" },
-                    input_html: { class: "mt-1 block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                    input_html: {
+                      class: "mt-1 block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                      minlength: 6,
+                      maxlength: 128
+                    } %>
       </div>
 
       <% if devise_mapping.rememberable? %>

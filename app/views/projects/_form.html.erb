@@ -1,5 +1,11 @@
 <%= simple_form_for @project do |f| %>
-  <%= f.input :name %>
-  <%= f.input :description %>
+  <%= f.input :name,
+              required: true,
+              input_html: { maxlength: 255 } %>
+
+  <%= f.input :description,
+              required: false,
+              input_html: { maxlength: 2000 } %>
+
   <%= f.button :submit %>
 <% end %>
