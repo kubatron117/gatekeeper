@@ -26,6 +26,3 @@
       data: { confirm: "Do you really want to close your account? This cannot be undone." } } do |f|
       = render "devise/registrations/shared/error_messages", resource: @delete_user
       = render "devise/registrations/shared/delete_account_form",     f: f
-
-    %p.mt-4.text-center.text-sm.text-gray-600
-      = link_to "Back", :back, class: "font-medium text-indigo-600 hover:text-indigo-500"
