@@ -1,7 +1,7 @@
 <%= simple_form_for @task do |f| %>
   <%= f.error_notification %>
   <%= f.input :subject %>
-  <%= f.input :description %>
+  <%= f.rich_text_area :description %>
   <% if f.object.persisted? %>
     <%= f.input :status, as: :select, collection: Task.statuses.keys.map { |s| [s.humanize, s] } %>
   <% end %>
