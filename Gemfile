@@ -52,7 +52,8 @@ gem 'ransack', "~> 4.3.0"
 
 gem "active_storage_validations", "~> 3.0.0"
 
-gem 'aws-sdk-rails', '~> 5.1'
+gem 'aws-sdk-rails', '~> 5'
+gem 'aws-actionmailer-ses', '~> 1'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
