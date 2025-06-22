@@ -402,7 +402,7 @@ GEM
     simple_form-tailwind (0.2.0)
       railties (>= 7.0)
       simple_form (>= 5.0)
-    solid_cable (3.0.8)
+    solid_cable (3.0.10)
       actioncable (>= 7.2)
       activejob (>= 7.2)
       activerecord (>= 7.2)
