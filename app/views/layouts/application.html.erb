@@ -23,6 +23,7 @@
   </head>
 
   <body>
+    <%= render "shared/toast_container" %>
     <% if user_signed_in? %>
       <%= render "layouts/navbar" %>
     <% end %>
