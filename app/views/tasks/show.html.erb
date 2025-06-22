@@ -7,15 +7,19 @@
 
   <%= render @task %>
 
-  <h2>Attachments</h2>
+  <h2 class="mt-10 font-bold text-2xl mb-2">Attachments:</h2>
   <% @task.task_attachments.each do |attachment| %>
     <div class="attachment">
-      <%= attachment.note %>
-      <%= link_to attachment.file.filename.to_s, url_for(attachment.file), target: "_blank" %>
+      <div class="flex flex-row items-center gap-1 mb-2">
+        <strong>Note:</strong>
+        <%= attachment.note %>
+      </div>
+      <%= link_to "Link", url_for(attachment.file), target: "_blank" %>
       <% if attachment.file.image? %>
         <%= image_tag attachment.file.variant(resize_to_limit: [200, 200]) %>
       <% end %>
     </div>
+    <hr class="my-4">
   <% end %>
 
   <%= link_to "Edit this task", edit_task_path(@task), class: "w-full sm:w-auto text-center rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
