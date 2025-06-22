@@ -23,38 +23,59 @@
         <%= f.input :avatar,
                     as: :file,
                     label_html: { class: "block text-sm font-medium text-gray-900 mr-4" },
-                    input_html: { class: "block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" } %>
+                    input_html: {
+                      accept: "image/png,image/jpeg,image/tiff",
+                      class: "block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                    } %>
       </div>
 
       <div class="space-y-4">
         <%= f.input :first_name,
                     as: :string,
                     required: true,
-                    input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                    input_html: {
+                      class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                      maxlength: 100
+                    } %>
 
         <%= f.input :last_name,
                     as: :string,
                     required: true,
-                    input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                    input_html: {
+                      class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                      maxlength: 100
+                    } %>
 
         <%= f.input :email,
                     as: :email,
                     required: true,
                     autocomplete: "email",
-                    input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                    input_html: {
+                      class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                      type: "email",
+                      maxlength: 255
+                    } %>
 
         <%= f.input :password,
                     as: :password,
                     required: true,
                     hint: (@minimum_password_length ? "(#{@minimum_password_length} characters minimum)" : nil),
                     autocomplete: "new-password",
-                    input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                    input_html: {
+                      class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                      minlength: @minimum_password_length,
+                      maxlength: 128
+                    } %>
 
         <%= f.input :password_confirmation,
                     as: :password,
                     required: true,
                     autocomplete: "new-password",
-                    input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                    input_html: {
+                      class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                      minlength: @minimum_password_length,
+                      maxlength: 128
+                    } %>
       </div>
 
       <div class="pt-6 border-t border-gray-200 space-y-4">
@@ -62,16 +83,31 @@
         <%= f.simple_fields_for :address do |a| %>
           <div class="grid grid-cols-1 gap-y-4">
             <%= a.input :street_name,
-                        input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                        input_html: {
+                          class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                          maxlength: 100
+                        } %>
             <%= a.input :street_number,
-                        input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                        input_html: {
+                          class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                          maxlength: 20
+                        } %>
             <%= a.input :city,
-                        input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                        input_html: {
+                          class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                          maxlength: 100
+                        } %>
             <%= a.input :postal_code,
-                        input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                        input_html: {
+                          class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                          maxlength: 20
+                        } %>
             <%= a.input :country_name,
                         as: :string,
-                        input_html: { class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm" } %>
+                        input_html: {
+                          class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+                          maxlength: 100
+                        } %>
           </div>
         <% end %>
       </div>

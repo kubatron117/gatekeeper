@@ -1,12 +1,19 @@
 <%= simple_form_for @task do |f| %>
   <%= f.error_notification %>
-  <%= f.input :subject %>
+  <%= f.input :subject,
+              required: true,
+              input_html: { maxlength: 255 } %>
   <%= f.rich_text_area :description %>
   <% if f.object.persisted? %>
-    <%= f.input :status, as: :select, collection: Task.statuses.keys.map { |s| [s.humanize, s] } %>
+    <%= f.input :status,
+                as: :select,
+                collection: Task.statuses.keys.map { |s| [s.humanize, s] },
+                required: true %>
   <% end %>
-  <%= f.association :user %>
-  <%= f.association :project %>
+  <%= f.association :user,
+                    required: true %>
+  <%= f.association :project,
+                    required: true %>
 
   <div data-controller="attachments">
     <div data-attachments-target="list">

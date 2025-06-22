@@ -1,7 +1,7 @@
 <div class="nested-fields mb-3 border p-3 rounded" data-new="<%= f.object.new_record? %>">
   <% if f.object.persisted? %>
     <p>
-      <strong>Stávající soubor:</strong>
+      <strong>Current file:</strong>
       <%= link_to f.object.file.filename, rails_blob_path(f.object.file, disposition: 'attachment') %>
     </p>
   <% end %>
@@ -9,22 +9,28 @@
   <div class="form-group">
     <%= f.input :file,
                 as: :file,
-                label: (f.object.persisted? ? "Nový soubor (volitelné)" : "Soubor"),
-                input_html: { direct_upload: true } %>
+                label: (f.object.persisted? ? "New file (voluntary)" : "File"),
+                input_html: {
+                  direct_upload: true,
+                  accept: "image/png,image/jpeg,application/pdf,image/tiff"
+                } %>
   </div>
 
   <div class="form-group">
     <%= f.input :note,
                 as: :text,
-                label: "Poznámka k příloze" %>
+                label: "File note",
+                input_html: { maxlength: 500 } %>
   </div>
 
   <div>
     <% if f.object.persisted? %>
-      <%= f.input :_destroy, as: :boolean, label: "Odstranit přílohu" %>
+      <%= f.input :_destroy,
+                  as: :boolean,
+                  label: "Delete attachment" %>
     <% else %>
       <button class="btn btn-sm btn-danger" type="button" data-action="attachments#remove">
-        Odebrat
+        Delete
       </button>
     <% end %>
   </div>
