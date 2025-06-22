@@ -27,8 +27,15 @@ class UsersController < ApplicationController
 
   # DELETE /users/1
   def destroy
-    @user.destroy
-    redirect_to users_path, notice: "Uživatel byl smazán.", status: :see_other
+    if @user.destroy
+      redirect_to users_path,
+                  status: :see_other,
+                  notice: "User was successfully deleted."
+    else
+      redirect_to users_path,
+                  status: :see_other,
+                  alert: "User could not be deleted."
+    end
   end
 
   private
