@@ -1,4 +1,4 @@
-<div class="nested-fields mb-3 border p-3 rounded" data-new="<%= new_record || false %>">
+<div class="nested-fields mb-3 border p-3 rounded" data-new="<%= f.object.new_record? %>">
   <% if f.object.persisted? %>
     <p>
       <strong>Stávající soubor:</strong>

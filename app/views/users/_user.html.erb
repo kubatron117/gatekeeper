@@ -1,31 +1,10 @@
-<div id="<%= dom_id user %>" class="w-full sm:w-auto my-5 space-y-5">
-
+<%= render layout: 'shared/show_items_wrapper', locals: { record: user } do %>
   <%= render "users/user_avatar", user: user %>
-
-  <div>
-    <strong class="block font-medium mb-1">First name:</strong>
-    <%= user.first_name %>
-  </div>
-
-  <div>
-    <strong class="block font-medium mb-1">Last name:</strong>
-    <%= user.last_name %>
-  </div>
-
-  <div>
-    <strong class="block font-medium mb-1">Email:</strong>
-    <%= user.email %>
-  </div>
-
-  <div>
-    <strong class="block font-medium mb-1">Created at:</strong>
-    <%= l(user.created_at, format: :short ) %>
-  </div>
+  <%= render 'shared/show_single_item', label: 'First name:', value: user.first_name %>
+  <%= render 'shared/show_single_item', label: 'Last name:', value: user.last_name %>
+  <%= render 'shared/show_single_item', label: 'Email:', value: user.email %>
+  <%= render 'shared/show_single_item', label: 'Created at:', value: l(user.created_at, format: :short ) %>
   <% if user.address.present? %>
-    <div>
-      <strong class="block font-medium mb-1">Address:</strong>
-      <%= "#{user.address.street_name} #{user.address.street_number}, " \
-            "#{user.address.city}, #{user.address.postal_code}, #{user.address.country_name}" %>
-    </div>
+    <%= render 'users/address' %>
   <% end %>
-</div>
+<% end %>
