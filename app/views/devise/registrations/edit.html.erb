@@ -12,87 +12,12 @@
                         as: resource_name,
                         url: registration_path(resource_name),
                         html: { method: :put, class: "mt-8 space-y-6", multipart: true } do |f| %>
-      <%= render "devise/shared/error_messages", resource: resource %>
-
-      <div class="flex items-center justify-center">
-        <%= f.input :avatar,
-                    as: :file,
-                    label_html: { class: "block text-sm font-medium text-gray-900 mr-4" },
-                    input_html: {
-                      class: "block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-                    } %>
-      </div>
-
-      <div class="space-y-4">
-        <% [:current_password, :email, :password, :password_confirmation].each do |attr| %>
-          <%= f.input attr,
-                      as: (attr == :email ? :email : :password),
-                      required: (attr == :current_password || attr == :email),
-                      autocomplete: (
-                        attr == :email ? "email" :
-                          attr == :current_password ? "current-password" : "new-password"
-                      ),
-                      label: (attr == :current_password ? t("simple_form.labels.devise.current_password") : nil),
-                      hint: (attr == :password && @minimum_password_length ? "(#{@minimum_password_length} characters minimum)" : nil),
-                      input_html: {
-                        autofocus: (attr == :email),
-                        class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
-                      } %>
-        <% end %>
-
-        <%= f.input :first_name,
-                    required: true,
-                    input_html: {
-                      class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
-                    } %>
-        <%= f.input :last_name,
-                    required: true,
-                    input_html: {
-                      class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
-                    } %>
-      </div>
-
-      <div class="pt-6 border-t border-gray-200 space-y-4">
-        <h3 class="text-lg font-medium text-gray-900">Address</h3>
-        <%= f.simple_fields_for :address do |a| %>
-          <div class="grid grid-cols-1 gap-y-4">
-            <%= a.input :street_name,
-                        input_html: {
-                          class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
-                        } %>
-            <%= a.input :street_number,
-                        input_html: {
-                          class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
-                        } %>
-            <%= a.input :city,
-                        input_html: {
-                          class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
-                        } %>
-            <%= a.input :postal_code,
-                        input_html: {
-                          class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
-                        } %>
-            <%= a.input :country_name,
-                        as: :string,
-                        input_html: {
-                          class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm"
-                        } %>
-
-            <% if a.object.persisted? %>
-              <div class="flex items-center space-x-2 mt-2">
-                <%= a.input :_destroy,
-                            as: :boolean,
-                            label: "Remove address",
-                            boolean_label_class: "text-sm text-red-600",
-                            input_html: { class: "h-4 w-4 text-red-600" } %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-
-      <%= f.button :submit,
-                   "Update account",
+      <%= render "devise/registrations/shared/error_messages", resource: resource %>
+      <%= render "devise/registrations/shared/avatar_field",           f: f %>
+      <%= render "devise/registrations/shared/credentials_fields",     f: f, minimum_password_length: @minimum_password_length %>
+      <%= render "devise/registrations/shared/name_fields",            f: f %>
+      <%= render "devise/registrations/shared/address_fields",         f: f %>
+      <%= f.button :submit, "Update account",
                    class: "group relative flex w-full justify-center rounded-md bg-indigo-600 py-2 px-4 text-sm font-semibold text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" %>
     <% end %>
 
@@ -104,20 +29,8 @@
                           class: "pt-6 space-y-6 border-t border-gray-200",
                           data: { confirm: "Do you really want to close your account? This cannot be undone." }
                         } do |f| %>
-      <%= render "devise/shared/error_messages", resource: @delete_user %>
-
-      <%= f.input :id, as: :hidden %>
-      <%= f.input :current_password,
-                  as: :password,
-                  required: true,
-                  label: "Confirm password to close account",
-                  input_html: {
-                    class: "block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-red-600 sm:text-sm"
-                  } %>
-
-      <%= f.button :submit,
-                   "Close my account",
-                   class: "group relative flex w-full justify-center rounded-md bg-red-600 py-2 px-4 text-sm font-semibold text-white hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2" %>
+      <%= render "devise/registrations/shared/error_messages", resource: @delete_user %>
+      <%= render "devise/registrations/shared/delete_account_form",     f: f %>
     <% end %>
 
     <p class="mt-4 text-center text-sm text-gray-600">
