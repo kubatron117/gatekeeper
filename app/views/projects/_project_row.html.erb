@@ -1,20 +1,10 @@
 <tr>
-  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-    <%= project.name %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-    <%= l(project.created_at, format: :short) %>
-  </td>
-  <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
-    <%= project.tasks_count %>
-  </td>
-  <td class="px-6 py-4 flex items-center space-x-2">
-    <%= link_to "Show", project,
-                class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-blue-600 hover:text-blue-800" %>
-    <%= link_to "Edit", edit_project_path(project),
-                class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-blue-600 hover:text-blue-800" %>
-    <%= button_to "Destroy", project, method: :delete,
-                  data: { turbo_confirm: "Are you sure?" },
-                  class: "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-red-600 hover:text-red-800" %>
-  </td>
+  <%= render "shared/table_td", value: project.name %>
+  <%= render "shared/table_td", value: l(project.created_at, format: :short) %>
+  <%= render "shared/table_td", value: project.tasks_count %>
+  <%= render "shared/table_td_flex" do %>
+    <%= render 'shared/action_link', name: 'Show', path: project %>
+    <%= render 'shared/action_link', name: 'Edit', path: edit_project_path(project) %>
+    <%= render 'shared/destroy_button', resource: project %>
+  <% end %>
 </tr>
