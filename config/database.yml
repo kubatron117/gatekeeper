@@ -85,7 +85,7 @@ production:
   primary: &primary_production
     <<: *default
     database: gatekeeper_production
-    username: gatekeeper
+    username: postgres
     password: <%= ENV["POSTGRES_PASSWORD"] %>
   cache:
     <<: *primary_production
