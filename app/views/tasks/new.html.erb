@@ -1,6 +1,0 @@
-<% content_for :title, "New task" %>
-
-<%= render "shared/secondary_container", title: "New task" do %>
-  <%= render "form", user: @task %>
-  <%= render 'shared/action_link_primary', name: 'Back to tasks', path: tasks_path %>
-<% end %>

@@ -1,20 +1,17 @@
 - content_for :title, "Projects"
 
 = render "shared/primary_container", title: "Projects", path: new_project_path do
-  = render 'shared/flash'
+  = render "shared/flash"
 
-  = render 'shared/table',
-    headers: [
-    { attr: :name,       label: 'Name' },
-    { attr: :created_at, label: 'Created at' },
-    { attr: nil,         label: 'Tasks' },
-    { attr: nil,         label: 'Actions' }
-    ],
+  = render "shared/table",
+      headers: [{ attr: :name, label: "Name" },
+    { attr: :created_at, label: "Created at" },
+    { attr: nil, label: "Tasks" },
+    { attr: nil, label: "Actions" }],
     pagination: @projects,
     search: { form: @q, url: projects_path, fields: [:name] } do
-
     - if @projects.any?
-      = render partial: 'project_row', collection: @projects, as: :project
+      = render partial: "project_row", collection: @projects, as: :project
     - else
       %tr
-        = render 'shared/table_td', value: 'No projects found.'
+        = render "shared/table_td", value: "No projects found."

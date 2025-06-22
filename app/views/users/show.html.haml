@@ -1,0 +1,8 @@
+- content_for :title, "User details"
+
+= render "shared/secondary_container", title: "User details" do
+  = render @user
+
+  = render 'shared/action_link_primary', name: 'Edit this user',   path: edit_user_path(@user)
+  = render 'shared/action_link_primary', name: 'Back to users',   path: users_path
+  = render 'shared/destroy_button_primary', name: 'Destroy this user', resource: @user

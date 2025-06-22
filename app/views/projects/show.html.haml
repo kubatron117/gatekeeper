@@ -9,18 +9,15 @@
 
   %h2.mt-10.font-bold.text-3xl Tasks for project:
 
-  %div.mt-3
+  .mt-3
     = render 'shared/table',
-      headers: [
-      { attr: nil, label: 'Subject' },
+      headers: [{ attr: nil, label: 'Subject' },
       { attr: nil, label: 'Status' },
       { attr: nil, label: 'Assigned to' },
       { attr: nil, label: 'Project' },
       { attr: nil, label: 'Created at' },
-      { attr: nil, label: 'Actions' }
-      ],
+      { attr: nil, label: 'Actions' }],
       pagination: @tasks do
-
       - if @tasks.any?
         = render partial: 'tasks/task_row', collection: @tasks, as: :task
       - else

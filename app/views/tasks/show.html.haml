@@ -1,0 +1,21 @@
+- content_for :title, "Showing task"
+
+= render "shared/secondary_container", title: "Showing task" do
+  = render @task
+
+  - if @task.task_attachments.present?
+    %h2.mt-10.font-bold.text-2xl.mb-2 Attachments:
+
+  - @task.task_attachments.each do |attachment|
+    .attachment
+      .flex.flex-row.items-center.gap-1.mb-2
+        %strong Note:
+        = attachment.note
+      = link_to "Link", url_for(attachment.file), target: "_blank"
+      - if attachment.file.image?
+        = image_tag attachment.file.variant(resize_to_limit: [200, 200])
+    %hr.my-4
+
+  = render 'shared/action_link_primary', name: 'Edit this task',   path: edit_task_path(@task)
+  = render 'shared/action_link_primary', name: 'Back to tasks',   path: tasks_path
+  = render 'shared/destroy_button_primary', name: 'Destroy this task', resource: @task
