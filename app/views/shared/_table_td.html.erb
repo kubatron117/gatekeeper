@@ -1,3 +1,7 @@
 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-  <%= value %>
+  <% if local_assigns.key?(:value) && value.present? %>
+    <%= value %>
+  <% else %>
+    <%= capture { yield } %>
+  <% end %>
 </td>
