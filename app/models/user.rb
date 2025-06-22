@@ -9,11 +9,20 @@ class User < ApplicationRecord
                                 reject_if: :all_blank
   has_one_attached :avatar
 
+  has_many :tasks, dependent: :restrict_with_error, inverse_of: :user
+
   enum :role, { admin: 1, user: 2 }
 
   validates :first_name, presence: true, length: { maximum: 100 }
   validates :last_name, presence: true, length: { maximum: 100 }
   validates :role, presence: true, inclusion: { in: roles.keys }
+  validates :avatar,
+            content_type: {
+              in: ['image/png', 'image/jpeg', 'image/tiff'],
+              message: 'must be PNG, JPEG or TIFF.' },
+            size: {
+              between: 1.kilobyte..50.megabytes,
+              message: 'size must be between 1 KB and 50 MB' }
 
   before_validation :set_default_role, on: :create
 
