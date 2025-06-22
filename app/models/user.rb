@@ -24,6 +24,7 @@ class User < ApplicationRecord
               between: 1.kilobyte..50.megabytes,
               message: 'size must be between 1 KB and 50 MB' }
 
+  before_create :set_default_role
   before_validation :set_default_role, on: :create
 
   def to_s
