@@ -1,7 +1,0 @@
-<%
-  button_text   = local_assigns.fetch(:name, "Destroy")
-  confirm_text  = local_assigns.fetch(:confirm, "Are you sure?")
-  default_class = "inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg text-red-600 hover:text-red-800"
-  classes       = [default_class].compact.join(" ")
-%>
-<%= button_to button_text, resource, method: :delete, data: { turbo_confirm: confirm_text }, class: classes %>

@@ -1,5 +1,0 @@
-<%= render layout: 'shared/show_items_wrapper', locals: { record: project } do %>
-  <%= render 'shared/show_single_item', label: 'Name:', value: project.name %>
-  <%= render 'shared/show_single_item', label: 'Description:', value: project.description %>
-  <%= render 'shared/show_single_item', label: 'Created at:', value: l(project.created_at, format: :short) %>
-<% end %>

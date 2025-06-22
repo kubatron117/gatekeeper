@@ -1,0 +1,8 @@
+- button_text   = local_assigns.fetch(:name, "Destroy")
+- confirm_text  = local_assigns.fetch(:confirm, "Are you sure?")
+
+= button_to button_text, @user,
+  method: :delete,
+  form_class: "sm:inline-block mt-2 sm:mt-0 sm:ml-2",
+  class: "w-full rounded-md px-3.5 py-2.5 text-white bg-red-600 hover:bg-red-500 font-medium cursor-pointer",
+  data: { turbo_confirm: confirm_text }
