@@ -1,7 +1,0 @@
-<%= render layout: 'shared/show_items_wrapper', locals: { record: task } do %>
-  <%= render 'shared/show_single_item', label: 'Subject:', value: task.subject %>
-  <%= render 'shared/show_single_item', label: 'Description:', value: task.description %>
-  <%= render 'shared/show_single_item', label: 'Status:', value: task.status.humanize %>
-  <%= render 'shared/show_single_item', label: 'User:', value: task.user %>
-  <%= render 'shared/show_single_item', label: 'Project:', value: task.project.name %>
-<% end %>

@@ -1,0 +1,27 @@
+.flex.flex-col.mb-12
+  .-m-1.5.overflow-x-auto
+    .p-1.5.min-w-full.inline-block.align-middle
+      .border.border-gray-200.rounded-lg.divide-y.divide-gray-200
+        - if local_assigns[:search]
+          .py-3.px-4
+            = render 'shared/search_form',
+                     form: search[:form],
+                     url: search[:url],
+                     fields: search[:fields]
+
+        .overflow-hidden
+          %table.min-w-full.divide-y.divide-gray-200
+            %thead.bg-gray-50
+              %tr
+                - headers.each do |h|
+                  %th{ scope: "col", class: "px-6 py-3 text-start text-xs font-medium text-gray-500 uppercase" }
+                    - if h[:attr]
+                      = sort_link(search[:form], h[:attr], h[:label])
+                    - else
+                      = h[:label]
+            %tbody.divide-y.divide-gray-200
+              = yield
+
+        .py-1.px-4
+          %nav.flex.items-center.space-x-1{ aria: { label: "Pagination" } }
+            = paginate pagination
