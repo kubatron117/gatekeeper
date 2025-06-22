@@ -1,4 +1,6 @@
 class Project < ApplicationRecord
+  paginates_per 5
+
   has_many :tasks, dependent: :restrict_with_error
 
   validates :name, presence: true, length: { maximum: 255 }

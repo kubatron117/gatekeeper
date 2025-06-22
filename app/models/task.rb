@@ -1,4 +1,6 @@
 class Task < ApplicationRecord
+  paginates_per 8
+
   enum :status, { created: 1, in_progress: 2, waiting_for_client: 3, completed: 4 }
 
   belongs_to :user
