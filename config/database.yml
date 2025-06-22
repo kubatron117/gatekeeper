@@ -18,14 +18,14 @@ default: &default
   # For details on connection pooling, see Rails configuration guide
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("POSTGRES_USER") { "user" } %>
+  username: <%= ENV.fetch("POSTGRES_USER") { "postgres" } %>
   password: <%= ENV['POSTGRES_PASSWORD'] %>
   host: <%= ENV.fetch("DB_HOST") { "127.0.0.1" } %>
 
 
 development:
   <<: *default
-  database: gatekeeper_development
+  database: <%= ENV["POSTGRES_DATABASE"] %>
 
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
@@ -85,7 +85,7 @@ production:
   primary: &primary_production
     <<: *default
     database: gatekeeper_production
-    username: gatekeeper
+    username: postgres
     password: <%= ENV["POSTGRES_PASSWORD"] %>
   cache:
     <<: *primary_production

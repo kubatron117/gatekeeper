@@ -58,7 +58,13 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = { host: "gatekeeper.stormlab.cz", protocol: "https" }
+  config.action_mailer.default_options = { from: 'no-reply@gatekeeper.stormlab.cz' }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default :charset => "utf-8"
+  config.action_mailer.delivery_method = :ses_v2
+  config.action_mailer.ses_v2_settings = { region: 'eu-central-1' }
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   # config.action_mailer.smtp_settings = {

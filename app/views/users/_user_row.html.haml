@@ -1,0 +1,16 @@
+%tr
+  = render "shared/table_td" do
+    = render "users/user_avatar", user: user
+  = render "shared/table_td", value: user.first_name
+  = render "shared/table_td", value: user.last_name
+  = render "shared/table_td", value: user.email
+  = render "shared/table_td", value: l(user.created_at, format: :short)
+  = render "shared/table_td", value: user&.address&.street_name
+  = render "shared/table_td", value: user&.address&.street_number
+  = render "shared/table_td", value: user&.address&.city
+  = render "shared/table_td", value: user&.address&.postal_code
+  = render "shared/table_td", value: user&.address&.country_name
+  = render "shared/table_td_flex" do
+    = render 'shared/action_link', name: 'Show', path: user
+    = render 'shared/action_link', name: 'Edit', path: edit_user_path(user)
+    = render 'shared/destroy_button', resource: user

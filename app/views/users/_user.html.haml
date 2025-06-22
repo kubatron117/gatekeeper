@@ -1,0 +1,8 @@
+= render layout: 'shared/show_items_wrapper', locals: { record: user } do
+  = render "users/user_avatar", user: user
+  = render 'shared/show_single_item', label: 'First name:', value: user.first_name
+  = render 'shared/show_single_item', label: 'Last name:',  value: user.last_name
+  = render 'shared/show_single_item', label: 'Email:',      value: user.email
+  = render 'shared/show_single_item', label: 'Created at:', value: l(user.created_at, format: :short)
+  - if user.address.present?
+    = render 'users/address', address: user.address

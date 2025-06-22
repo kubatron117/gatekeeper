@@ -40,7 +40,22 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+gem "image_processing", "~> 1.2"
+gem "devise", "~> 4.9.4"
+gem "simple_form", "~> 5.3.1"
+gem "simple_form-tailwind", "~> 0.2.0"
+gem "devise_invitable", "~> 2.0.11"
+gem "cancancan", "~> 3.6.1"
+
+gem 'kaminari', "~> 1.2.2"
+gem 'ransack', "~> 4.3.0"
+
+gem "active_storage_validations", "~> 3.0.0"
+
+gem 'aws-sdk-rails', '~> 5'
+gem 'aws-actionmailer-ses', '~> 1'
+
+gem 'hamlit'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -51,6 +66,11 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "rspec-rails", "~> 8.0.1"
+  gem "shoulda-matchers", "~> 6.5.0"
+  gem "factory_bot_rails", "~> 6.5.0"
+  gem "faker", "~> 3.5.1"
 end
 
 group :development do

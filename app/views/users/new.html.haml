@@ -1,0 +1,5 @@
+- content_for :title, "New User"
+
+= render "shared/secondary_container", title: "New User" do
+  = render "form", user: @user
+  = render 'shared/action_link_primary', name: 'Back to users', path: users_path

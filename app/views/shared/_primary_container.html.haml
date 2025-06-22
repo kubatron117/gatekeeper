@@ -1,0 +1,6 @@
+.w-full
+  .flex.justify-between.items-center.mb-6
+    %h1.font-bold.text-4xl= title
+    = render 'shared/action_link_primary', name: new_singular_lower(title), path: path
+
+  = yield
