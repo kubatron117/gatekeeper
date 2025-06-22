@@ -13,9 +13,9 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true, length: { maximum: 100 }
   validates :last_name, presence: true, length: { maximum: 100 }
-  #todo: validate email
+  validates :role, presence: true, inclusion: { in: roles.keys }
 
-  before_create :set_default_role
+  before_validation :set_default_role, on: :create
 
   def to_s
     "#{first_name} #{last_name} (#{email})"

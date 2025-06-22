@@ -41,6 +41,7 @@ class UsersController < ApplicationController
       :first_name, :last_name, :email,
       :password, :password_confirmation,
       :avatar,
+      :role,
       address_attributes: %i[
         id
         street_name

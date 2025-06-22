@@ -53,7 +53,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_123128) do
   end
 
   create_table "projects", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 255, null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -68,9 +68,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_123128) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.string "subject"
+    t.string "subject", limit: 255, null: false
     t.text "description"
-    t.integer "status"
+    t.integer "status", null: false
     t.bigint "user_id", null: false
     t.bigint "project_id", null: false
     t.datetime "created_at", null: false
@@ -98,7 +98,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_123128) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
-    t.integer "role", default: 0, null: false
+    t.integer "role", null: false
     t.index ["address_id"], name: "index_users_on_address_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
