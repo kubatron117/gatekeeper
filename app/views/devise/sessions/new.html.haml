@@ -1,0 +1,44 @@
+.flex.min-h-full.flex-col.items-center.justify-center.px-6.py-12.lg:px-8
+  .w-full.max-w-md.space-y-8
+    .text-center
+      %img.mx-auto.h-10.w-auto{ src: "https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600", alt: "Your Company" }
+      %h2.mt-6.text-3xl.font-bold.tracking-tight.text-gray-900 Log in to your account
+
+    = simple_form_for resource,
+        as: resource_name,
+        url: session_path(resource_name),
+        html: { class: "mt-8 space-y-6" } do |f|
+      = render "devise/shared/error_messages", resource: resource
+
+      .space-y-4
+        = f.input :email,
+          as: :email,
+          required: true,
+          autofocus: true,
+          autocomplete: "email",
+          label_html: { class: "block text-sm font-medium text-gray-900" },
+          input_html: { class: "mt-1 block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+          type: "email",
+          maxlength: 255 }
+        = f.input :password,
+          as: :password,
+          required: true,
+          autocomplete: "current-password",
+          label_html: { class: "block text-sm font-medium text-gray-900" },
+          input_html: { class: "mt-1 block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:outline-indigo-600 sm:text-sm",
+          minlength: 6,
+          maxlength: 128 }
+
+      - if devise_mapping.rememberable?
+        = f.input :remember_me,
+          as: :boolean,
+          label_html: { class: "ml-2 block text-sm text-gray-900" },
+          input_html: { class: "h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded" },
+          wrapper_html: { class: "flex items-center" }
+
+      %div
+        = f.button :submit, "Log in",
+          class: "group relative flex w-full justify-center rounded-md bg-indigo-600 py-2 px-4 text-sm font-semibold text-white hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2"
+
+    %p.mt-4.text-center.text-sm.text-gray-600
+      = render "devise/shared/links"
