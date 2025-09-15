@@ -50,7 +50,7 @@ gem "cancancan", "~> 3.6.1"
 gem 'kaminari', "~> 1.2.2"
 gem 'ransack', "~> 4.3.0"
 
-gem "active_storage_validations", "~> 3.0.0"
+gem "active_storage_validations", "~> 3.0.2"
 
 gem 'aws-sdk-rails', '~> 5'
 gem 'aws-actionmailer-ses', '~> 1'
